@@ -7,8 +7,9 @@
     },
     "unified": {
         "pageTitle": "社交媒體下載器",
-        "pageDescription": "貼上影片連結，自動識別並下載。支援 嗶哩嗶哩、抖音、小紅書。",
-        "placeholder": "請在此處貼上影片連結..."
+        "pageDescription": "貼上連結或口令，自動識別並下載。支援 嗶哩嗶哩、抖音、小紅書。",
+        "placeholder": "請在此處貼上連結或口令...",
+        "newBadge": "新增抖音圖文支援"
     },
     "page": {
         "feedback": "如有回饋或建議，請至 ",
@@ -417,9 +418,10 @@
             "other": "請告訴我們你的想法..."
         },
         "contentCounter": "{current} / {max} 字元",
-        "emailLabel": "聯絡信箱（選填）",
+        "emailLabel": "聯絡信笱",
         "emailPlaceholder": "your@email.com",
-        "emailInvalid": "信箱格式不正確",
+        "emailInvalid": "信笱格式不正確",
+        "emailRequired": "請填寫信笱，以便我們回覆你",
         "emailHint": "如果需要我們回覆，請留下信箱",
         "cancelButton": "取消",
         "submitButton": "提交反饋",

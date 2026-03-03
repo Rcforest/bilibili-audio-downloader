@@ -134,6 +134,12 @@ export default async function RootLayout({
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                {/* AdSense: 使用原生 script 标签，避免 Next.js Script 组件注入 data-nscript 属性导致 AdSense 报错和水合失败 */}
+                <script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581472267398547"
+                    crossOrigin="anonymous"
+                />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Toaster />
@@ -146,12 +152,6 @@ export default async function RootLayout({
                 >
                     {children}
                 </ThemeProvider>
-                <Script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581472267398547"
-                    crossOrigin="anonymous"
-                    strategy="afterInteractive"
-                />
                 <Script
                     strategy="afterInteractive"
                     src="https://www.googletagmanager.com/gtag/js?id=G-0BEHLKM3W5"

@@ -13,7 +13,7 @@ export function HelpCards({ dict }: HelpCardsProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:flex lg:flex-col lg:space-y-4">
             {/* 快速入门指南 */}
             <Card className="order-1">
-                <CardHeader className="p-4 md:p-6">
+                <CardHeader className="p-4">
                     <CardTitle className="flex items-center gap-2 text-lg">
                         <PlayCircle className="h-5 w-5 text-primary" />
                         {dict.guide.quickStart.title}
@@ -36,13 +36,13 @@ export function HelpCards({ dict }: HelpCardsProps) {
 
             {/* 支持平台 */}
             <Card className="order-2">
-                <CardHeader className="p-4 md:p-6">
+                <CardHeader className="p-4">
                     <CardTitle className="flex items-center gap-2 text-lg">
                         <Globe className="h-5 w-5 text-primary" />
                         {dict.guide.platformSupport.title}
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3 p-4 md:p-6">
+                <CardContent className="space-y-3 p-4">
                     <div className="flex items-start gap-3">
                         <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
                         <div>
@@ -87,13 +87,13 @@ export function HelpCards({ dict }: HelpCardsProps) {
 
             {/* URL格式说明 */}
             <Card className="order-3">
-                <CardHeader className="p-4 md:p-6">
+                <CardHeader className="p-4">
                     <CardTitle className="flex items-center gap-2 text-lg">
                         <Link className="h-5 w-5 text-primary" />
                         {dict.guide.linkFormats.title}
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4 p-4 md:p-6">
+                <CardContent className="space-y-4 p-4">
                     <div>
                         <p className="font-medium mb-2">{dict.guide.linkFormats.bilibili.title}</p>
                         <div className="bg-muted p-3 rounded-md space-y-1 text-sm font-mono">

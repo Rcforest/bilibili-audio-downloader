@@ -26,7 +26,7 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
     const displayTitle = result.title;
     return (
         <Card>
-            <CardHeader className="p-4 md:p-6">
+            <CardHeader className="p-4">
                 <div className="flex items-center justify-between mb-2">
                     <CardTitle className="text-lg">{dict.result.title}</CardTitle>
                     <Button variant="ghost" size="sm" onClick={onClose}>
@@ -40,7 +40,7 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
                     )}
                 </p>
             </CardHeader>
-            <CardContent className="p-4 md:p-6">
+            <CardContent className="px-4 py-2">
                 <div className="space-y-4">
                     {isImageNote ? (
                         <ImageNoteGrid
@@ -241,7 +241,7 @@ function ImageNoteGrid({ images, title, platform, dict }: { images: string[]; ti
             });
             currentBlobUrls.clear();
         };
-    }, [images]);
+    }, [images, platform]);
 
     const handleDownload = (index: number, originalUrl: string) => {
         const state = imageStates.get(index);

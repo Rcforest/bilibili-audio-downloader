@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 
 import { toast } from 'sonner';
-import { Loader2, HelpCircle, Menu, BookOpen } from 'lucide-react';
+import { Loader2, HelpCircle, Menu, Github } from 'lucide-react';
 import axios from 'axios';
 import type { Dictionary } from '@/lib/i18n/types';
 import type { Locale } from "@/lib/i18n/config";
@@ -45,13 +45,13 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
     const [error, setError] = useState('');
     const [parseResult, setParseResult] = useState<UnifiedParseResult['data'] | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isDesktopViewport, setIsDesktopViewport] = useState<boolean | null>(null);
 
     const [downloadHistory, setDownloadHistory] = useLocalStorageState<DownloadRecord[]>(DOWNLOAD_HISTORY_STORAGE_KEY, {
         defaultValue: []
     });
     const seoCopy = locale === 'en'
         ? {
-            guidesLabel: 'Guides',
             trustLabel: 'Trust & Policies',
             privacyLabel: 'Privacy Policy',
             termsLabel: 'Terms of Use',
@@ -59,14 +59,12 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         }
         : locale === 'zh-tw'
           ? {
-              guidesLabel: '使用指南',
               trustLabel: '信任與政策',
               privacyLabel: '隱私政策',
               termsLabel: '使用條款',
               contactLabel: '聯絡我們',
           }
           : {
-              guidesLabel: '使用指南',
               trustLabel: '信任与政策',
               privacyLabel: '隐私政策',
               termsLabel: '使用条款',
@@ -157,6 +155,18 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
+        const updateViewport = () => setIsDesktopViewport(mediaQuery.matches);
+
+        updateViewport();
+        mediaQuery.addEventListener('change', updateViewport);
+
+        return () => {
+            mediaQuery.removeEventListener('change', updateViewport);
+        };
+    }, []);
+
     return (
         <div className="min-h-screen flex flex-col bg-background">
             <div
@@ -184,15 +194,15 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                 </DialogHeader>
                                 <div className="space-y-2">
                                     <Button variant="outline" className="w-full justify-start" asChild>
+                                        <a href="https://github.com/lxw15337674/galaxy-downloader" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+                                            <Github className="h-4 w-4" />
+                                            <span>GitHub</span>
+                                        </a>
+                                    </Button>
+                                    <Button variant="outline" className="w-full justify-start" asChild>
                                         <Link href={`/${locale}/faq`} onClick={() => setMobileMenuOpen(false)}>
                                             <HelpCircle className="h-4 w-4" />
                                             <span>{dict.page.faqLinkText}</span>
-                                        </Link>
-                                    </Button>
-                                    <Button variant="outline" className="w-full justify-start" asChild>
-                                        <Link href={`/${locale}/guides`} onClick={() => setMobileMenuOpen(false)}>
-                                            <BookOpen className="h-4 w-4" />
-                                            <span>{seoCopy.guidesLabel}</span>
                                         </Link>
                                     </Button>
                                     <FeedbackDialog
@@ -212,15 +222,15 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                 </div>
                 <div className="hidden md:flex max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 justify-end items-center gap-1">
                     <Button variant="ghost" size="sm" asChild>
+                        <a href="https://github.com/lxw15337674/galaxy-downloader" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                            <Github className="h-4 w-4" />
+                            <span>GitHub</span>
+                        </a>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
                         <Link href={`/${locale}/faq`} className="flex items-center gap-1">
                             <HelpCircle className="h-4 w-4" />
                             <span>{dict.page.faqLinkText}</span>
-                        </Link>
-                    </Button>
-                    <Button variant="ghost" size="sm" asChild>
-                        <Link href={`/${locale}/guides`} className="flex items-center gap-1">
-                            <BookOpen className="h-4 w-4" />
-                            <span>{seoCopy.guidesLabel}</span>
                         </Link>
                     </Button>
                     <FeedbackDialog locale={locale} dict={dict} />
@@ -238,19 +248,22 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                             <div className="sticky top-20 flex flex-col gap-4">
                                 <QuickStartCard dict={dict} />
                                 <FreeSupportCard dict={dict} />
-                                <SideRailAd slot="1341604736" />
+                                {isDesktopViewport === true && <SideRailAd slot="1341604736" />}
                             </div>
                         </div>
 
                         {/* 中栏：主要功能区域 */}
                         <div className="lg:col-span-2 flex flex-col gap-4">
                             <Card className="shrink-0">
-                                <CardHeader className="p-4 md:p-6">
+                                <CardHeader className="p-4">
                                     <h1 className="text-2xl text-center font-semibold tracking-tight">
                                         {dict.unified.pageTitle}
                                     </h1>
-                                    <p className="text-xs text-muted-foreground text-center ">
+                                    <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5 flex-wrap">
                                         {dict.unified.pageDescription}
+                                        <span className="inline-flex items-center rounded-full bg-green-500/15 px-2 py-0.5 text-xs font-medium text-green-600 dark:text-green-400 ring-1 ring-inset ring-green-500/30">
+                                            {dict.unified.newBadge}
+                                        </span>
                                     </p>
 
                                     <p className="text-center text-xs text-muted-foreground ">
@@ -265,7 +278,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                         </a>
                                     </p>
                                 </CardHeader>
-                                <CardContent className="p-4 md:p-6">
+                                <CardContent className="p-4">
                                     <form onSubmit={handleSubmit} className="space-y-6">
                                         <div className="space-y-2">
                                             <Textarea
@@ -321,9 +334,11 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                                     dict={dict}
                             />
 
-                            <div className="lg:hidden">
-                                <SideRailAd slot="5740014745" className="h-full" />
-                            </div>
+                            {isDesktopViewport === false && (
+                                <div className="lg:hidden">
+                                    <SideRailAd slot="5740014745" className="h-full" />
+                                </div>
+                            )}
 
                             {/* 历史记录 */}
                             <DownloadHistory
@@ -345,7 +360,7 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         <div className="hidden lg:block">
                             <div className="sticky top-20 flex flex-col gap-4">
                                 <PlatformGuideCard dict={dict} />
-                                <SideRailAd slot="6380909506" />
+                                {isDesktopViewport === true && <SideRailAd slot="6380909506" />}
                             </div>
                         </div>
                     </div>
@@ -360,10 +375,6 @@ export function UnifiedDownloader({ dict, locale }: UnifiedDownloaderProps) {
                         <p>
                             <Link className="underline" href={`/${locale}/faq`}>
                                 {dict.page.faqLinkText}
-                            </Link>
-                            {' · '}
-                            <Link className="underline" href={`/${locale}/guides`}>
-                                {seoCopy.guidesLabel}
                             </Link>
                         </p>
                         <p>

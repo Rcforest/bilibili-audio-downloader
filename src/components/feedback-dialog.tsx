@@ -50,8 +50,8 @@ export function FeedbackDialog({ locale, dict, triggerClassName, triggerIconOnly
 
     // 验证状态
     const contentError = content ? validateContent(content) : null
-    const emailError = email && !validateEmail(email)
-    const canSubmit = !contentError && !emailError && content.trim().length >= FEEDBACK_CONFIG.validation.contentMinLength
+    const emailError = email ? !validateEmail(email) : null
+    const canSubmit = !contentError && !emailError && content.trim().length >= FEEDBACK_CONFIG.validation.contentMinLength && validateEmail(email)
 
     // 获取当前反馈类型对应的placeholder
     const getPlaceholder = () => {
@@ -87,7 +87,7 @@ export function FeedbackDialog({ locale, dict, triggerClassName, triggerIconOnly
             const result = await submitFeedback({
                 type: feedbackType,
                 content: content.trim(),
-                email: email.trim() || undefined,
+                email: email.trim(),
             })
 
             if (result.success) {
@@ -190,7 +190,7 @@ export function FeedbackDialog({ locale, dict, triggerClassName, triggerIconOnly
             {/* 联系邮箱 */}
             <div className="space-y-2">
                 <Label htmlFor="feedback-email">
-                    {dict.feedback?.emailLabel || '联系邮箱（可选）'}
+                    {dict.feedback?.emailLabel || '联系邮箱'} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                     id="feedback-email"
@@ -204,9 +204,9 @@ export function FeedbackDialog({ locale, dict, triggerClassName, triggerIconOnly
                         {dict.feedback?.emailInvalid || '邮箱格式不正确'}
                     </p>
                 )}
-                {!emailError && email && (
+                {!email && (
                     <p className="text-xs text-muted-foreground">
-                        {dict.feedback?.emailHint || '如果需要我们回复，请留下邮箱'}
+                        {dict.feedback?.emailRequired || '请填写邮箱，以便我们回复你'}
                     </p>
                 )}
             </div>

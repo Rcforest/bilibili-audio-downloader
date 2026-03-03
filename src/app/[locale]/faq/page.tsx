@@ -100,12 +100,12 @@ export default async function FaqPage({
                 <section className="grid gap-4">
                     {dict.faqPage.questions.map((item, index) => (
                             <Card key={`${item.question}-${index}`}>
-                                <CardHeader className="p-4 md:p-6">
+                                <CardHeader className="p-4">
                                     <h2 className="text-base md:text-lg font-semibold tracking-tight">
                                         {item.question}
                                     </h2>
                                 </CardHeader>
-                                <CardContent className="p-4 md:p-6 pt-0 text-sm text-muted-foreground">
+                                <CardContent className="p-4 pt-0 text-sm text-muted-foreground">
                                     {item.answer}
                                 </CardContent>
                         </Card>

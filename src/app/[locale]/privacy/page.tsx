@@ -86,7 +86,6 @@ export default async function PrivacyPage({
               home: "首頁",
               linksLabel: "相關頁面",
               faq: "常見問題",
-              guides: "使用指南",
           }
           : {
               title: "隐私政策",
@@ -101,7 +100,6 @@ export default async function PrivacyPage({
               home: "首页",
               linksLabel: "相关页面",
               faq: "常见问题",
-              guides: "使用指南",
           }
 
     return (
@@ -121,8 +119,6 @@ export default async function PrivacyPage({
                     {copy.linksLabel}
                     {": "}
                     <Link className="underline" href={`/${locale}/faq`}>{copy.faq}</Link>
-                    {' · '}
-                    <Link className="underline" href={`/${locale}/guides`}>{copy.guides}</Link>
                 </p>
             </div>
             <PageStructuredData

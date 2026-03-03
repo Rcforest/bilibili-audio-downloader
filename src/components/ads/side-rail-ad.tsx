@@ -25,28 +25,74 @@ export function SideRailAd({ slot, className }: SideRailAdProps) {
       return;
     }
 
-    // Wait until the ad container is visible (width > 0) before pushing.
-    // Containers inside `hidden lg:block` have 0 width on smaller screens,
-    // which causes AdSense "No slot size for availableWidth=0" errors.
     const el = adRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry?.isIntersecting && el.offsetWidth > 0) {
-          observer.disconnect();
-          try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-            initializedRef.current = true;
-          } catch (error) {
-            console.error('AdSense error:', error);
-          }
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(el);
+    let rafId: number | null = null;
+    let disposed = false;
 
-    return () => observer.disconnect();
+    const hasRenderableSize = () => {
+      if (!document.contains(el)) {
+        return false;
+      }
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') {
+        return false;
+      }
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    };
+
+    const tryInitAd = () => {
+      if (disposed || initializedRef.current || !hasRenderableSize()) {
+        return;
+      }
+      if (el.getAttribute('data-adsbygoogle-status') === 'done') {
+        initializedRef.current = true;
+        return;
+      }
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        initializedRef.current = true;
+      } catch (error) {
+        console.error('AdSense error:', error);
+      }
+    };
+
+    const scheduleInit = () => {
+      if (disposed) {
+        return;
+      }
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        tryInitAd();
+      });
+    };
+
+    // Avoid pushing when element is hidden/collapsed by responsive layout.
+    const resizeObserver = new ResizeObserver(() => scheduleInit());
+    resizeObserver.observe(el);
+
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries[0]?.isIntersecting) {
+        scheduleInit();
+      }
+    });
+    intersectionObserver.observe(el);
+
+    window.addEventListener('resize', scheduleInit);
+    scheduleInit();
+
+    return () => {
+      disposed = true;
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('resize', scheduleInit);
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+    };
   }, [slot, pathname]);
 
   return (

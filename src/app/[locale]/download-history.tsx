@@ -75,7 +75,7 @@ export function DownloadHistory({ dict, downloadHistory, clearHistory, onRedownl
     return (
         <Card className="flex-1 min-h-0 flex flex-col">
             <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-                <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0 p-4 md:p-6">
+                <CardHeader className="flex flex-row items-center justify-between pb-2 shrink-0 p-4">
                     <CollapsibleTrigger className="flex items-center gap-2 hover:bg-muted/50 rounded-md p-1 -m-1">
                         <Button variant="ghost" size="icon" className="size-8">
                             <ChevronsUpDown className="size-8" />

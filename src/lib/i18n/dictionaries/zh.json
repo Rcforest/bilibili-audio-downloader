@@ -7,8 +7,9 @@
     },
     "unified": {
         "pageTitle": "社交媒体下载器",
-        "pageDescription": "粘贴视频链接，自动识别并下载。支持 哔哩哔哩、抖音、小红书。",
-        "placeholder": "请在此处粘贴视频链接..."
+        "pageDescription": "粘贴链接或口令，自动识别并下载。支持 哔哩哔哩、抖音、小红书。",
+        "placeholder": "请在此处粘贴链接或口令...",
+        "newBadge": "新增抖音图文支持"
     },
     "page": {
         "feedback": "如有反馈或建议，请到 ",
@@ -417,9 +418,10 @@
             "other": "请告诉我们你的想法..."
         },
         "contentCounter": "{current} / {max} 字符",
-        "emailLabel": "联系邮箱（可选）",
+        "emailLabel": "联系邮箱",
         "emailPlaceholder": "your@email.com",
         "emailInvalid": "邮箱格式不正确",
+        "emailRequired": "请填写邮箱，以便我们回复你",
         "emailHint": "如果需要我们回复，请留下邮箱",
         "cancelButton": "取消",
         "submitButton": "提交反馈",

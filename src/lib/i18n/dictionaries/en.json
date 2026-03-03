@@ -7,8 +7,9 @@
     },
     "unified": {
         "pageTitle": "Social Media Downloader",
-        "pageDescription": "Paste video links and automatically detect platform. Supports Bilibili, Douyin, and Xiaohongshu.",
-        "placeholder": "Paste video link here..."
+        "pageDescription": "Paste links or share tokens, automatically detect platform and download. Supports Bilibili, Douyin, and Xiaohongshu.",
+        "placeholder": "Paste link or share token here...",
+        "newBadge": "New: Douyin image notes"
     },
     "page": {
         "feedback": "For feedback or suggestions, please ",
@@ -416,9 +417,10 @@
             "other": "Please share your thoughts..."
         },
         "contentCounter": "{current} / {max} characters",
-        "emailLabel": "Contact Email (Optional)",
+        "emailLabel": "Contact Email",
         "emailPlaceholder": "your@email.com",
         "emailInvalid": "Invalid email format",
+        "emailRequired": "Please enter your email so we can reply to you",
         "emailHint": "Leave your email if you'd like us to follow up",
         "cancelButton": "Cancel",
         "submitButton": "Submit Feedback",

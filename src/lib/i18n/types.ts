@@ -28,6 +28,7 @@ export interface Dictionary {
         pageTitle: string;
         pageDescription: string;
         placeholder: string;
+        newBadge: string;
     };
     page: {
         feedback: string;
@@ -265,6 +266,7 @@ export interface Dictionary {
         emailPlaceholder: string;
         emailInvalid: string;
         emailHint: string;
+        emailRequired: string;
         cancelButton: string;
         submitButton: string;
         submittingButton: string;
