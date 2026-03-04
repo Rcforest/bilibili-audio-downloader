@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { ADSENSE_CLIENT_ID, AD_MIN_HEIGHT } from '@/lib/constants';
@@ -18,7 +18,6 @@ interface SideRailAdProps {
 export function SideRailAd({ slot, className }: SideRailAdProps) {
   const adRef = useRef<HTMLModElement | null>(null);
   const initializedRef = useRef(false);
-  const [isUnfilled, setIsUnfilled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -29,9 +28,6 @@ export function SideRailAd({ slot, className }: SideRailAdProps) {
     const el = adRef.current;
     let rafId: number | null = null;
     let disposed = false;
-    const updateAdStatus = () => {
-      setIsUnfilled(el.getAttribute('data-ad-status') === 'unfilled');
-    };
 
     const hasRenderableSize = () => {
       if (!document.contains(el)) {
@@ -85,17 +81,8 @@ export function SideRailAd({ slot, className }: SideRailAdProps) {
     });
     intersectionObserver.observe(el);
 
-    // Collapse container when AdSense explicitly reports "unfilled".
-    const statusObserver = new MutationObserver((mutations) => {
-      if (mutations.some((mutation) => mutation.attributeName === 'data-ad-status')) {
-        updateAdStatus();
-      }
-    });
-    statusObserver.observe(el, { attributes: true, attributeFilter: ['data-ad-status'] });
-
     window.addEventListener('resize', scheduleInit);
     scheduleInit();
-    updateAdStatus();
 
     return () => {
       disposed = true;
@@ -105,27 +92,15 @@ export function SideRailAd({ slot, className }: SideRailAdProps) {
       window.removeEventListener('resize', scheduleInit);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
-      statusObserver.disconnect();
     };
   }, [slot, pathname]);
 
   return (
-    <div
-      className={cn('w-full', className)}
-      style={
-        isUnfilled
-          ? { minHeight: 0, height: 0, overflow: 'hidden' }
-          : { minHeight: `${AD_MIN_HEIGHT}px` }
-      }
-    >
+    <div className={cn('w-full', className)} style={{ minHeight: `${AD_MIN_HEIGHT}px` }}>
       <ins
         ref={adRef}
         className="adsbygoogle block"
-        style={{
-          display: isUnfilled ? 'none' : 'block',
-          width: '100%',
-          minHeight: `${AD_MIN_HEIGHT}px`,
-        }}
+        style={{ display: 'block', width: '100%', minHeight: `${AD_MIN_HEIGHT}px` }}
         data-ad-client={ADSENSE_CLIENT_ID}
         data-ad-slot={slot}
         data-ad-format="auto"
