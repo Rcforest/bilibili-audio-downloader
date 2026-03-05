@@ -43,6 +43,15 @@ export function PlatformGuideCard({ dict }: PlatformGuideCardProps) {
                     </div>
                 </div>
 
+                {/* TikTok */}
+                <div className="flex items-start gap-2">
+                    <span className="text-sm">✅</span>
+                    <div className="flex-1">
+                        <p className="text-sm font-medium">{dict.guide.platformSupport.tiktok.name}</p>
+                        <p className="text-xs text-muted-foreground">{dict.guide.platformSupport.tiktok.summary}</p>
+                    </div>
+                </div>
+
                 {/* 更多平台预告 */}
                 <div className="text-center text-xs text-muted-foreground pt-2 border-t">
                     {dict.guide.platformSupport.comingSoon}

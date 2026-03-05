@@ -53,6 +53,7 @@
             "bilibili": "Bilibili",
             "douyin": "Douyin",
             "xiaohongshu": "Xiaohongshu",
+            "tiktok": "TikTok",
             "unknown": "Unknown"
         }
     },
@@ -180,6 +181,10 @@
             "xiaohongshu": {
                 "name": "Xiaohongshu",
                 "summary": "Video download & image notes support"
+            },
+            "tiktok": {
+                "name": "TikTok",
+                "summary": "Video download support"
             },
             "comingSoon": "🔄 More platforms coming soon..."
         },

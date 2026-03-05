@@ -52,4 +52,4 @@ export interface UnifiedApiResponse<T = unknown> {
 }
 
 
-export type Platform = 'bili' | 'bilibili' | 'douyin' | 'xiaohongshu' | 'unknown'; 
+export type Platform = 'bili' | 'bilibili' | 'douyin' | 'xiaohongshu' | 'tiktok' | 'unknown'; 

@@ -64,6 +64,13 @@ export function HelpCards({ dict }: HelpCardsProps) {
                             <p className="text-sm text-muted-foreground">{dict.guide.platformSupport.xiaohongshu.summary}</p>
                         </div>
                     </div>
+                    <div className="flex items-start gap-3">
+                        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                            <p className="font-medium">{dict.guide.platformSupport.tiktok.name}</p>
+                            <p className="text-sm text-muted-foreground">{dict.guide.platformSupport.tiktok.summary}</p>
+                        </div>
+                    </div>
 
                     {/* 音频提取说明 */}
                     {dict.guide.platformSupport.audioTip && (

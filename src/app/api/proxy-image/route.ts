@@ -7,6 +7,8 @@ const ALLOWED_IMAGE_HOSTS = [
     'biliimg.com',
     'xhscdn.com',
     'xiaohongshu.com',
+    'tiktokcdn.com',
+    'tiktok.com',
 ];
 
 const DEFAULT_ACCEPT =

@@ -94,7 +94,7 @@ export function ResultCard({ result, onClose, dict }: ResultCardProps) {
  * 单P视频的下载按钮
  */
 function SinglePartButtons({ result, dict }: { result: NonNullable<UnifiedParseResult['data']>; dict: HomeDictionary }) {
-    const showExtractAudio = result.platform === 'douyin' || result.platform === 'xiaohongshu';
+    const showExtractAudio = result.platform === 'douyin' || result.platform === 'xiaohongshu' || result.platform === 'tiktok';
 
     return (
         <>

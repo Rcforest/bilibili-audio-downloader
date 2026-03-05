@@ -56,6 +56,11 @@ const getPlatformBadge = (platform: Platform, dict: HomeDictionary) => {
                 text: dict.history.platforms.xiaohongshu,
                 className: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
             }
+        case 'tiktok':
+            return {
+                text: dict.history.platforms.tiktok,
+                className: 'bg-sky-100 text-sky-700 dark:bg-sky-900 dark:text-sky-300'
+            }
         default:
             return {
                 text: dict.history.platforms.unknown,

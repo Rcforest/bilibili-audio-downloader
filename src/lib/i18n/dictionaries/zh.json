@@ -53,6 +53,7 @@
             "bilibili": "哔哩哔哩",
             "douyin": "抖音",
             "xiaohongshu": "小红书",
+            "tiktok": "TikTok",
             "unknown": "未知"
         }
     },
@@ -180,6 +181,13 @@
             "xiaohongshu": {
                 "name": "小红书",
                 "summary": "支持视频下载、图文笔记"
+<<<<<<< HEAD
+=======
+            },
+            "tiktok": {
+                "name": "TikTok",
+                "summary": "支持视频下载、无水印"
+>>>>>>> dev
             },
             "comingSoon": "🔄 更多平台即将支持..."
         },
