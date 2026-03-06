@@ -14,9 +14,10 @@ interface SideRailAdProps {
   slot: string;
   className?: string;
   minHeight?: number;
+  height?: number;
 }
 
-export function SideRailAd({ slot, className, minHeight = AD_MIN_HEIGHT }: SideRailAdProps) {
+export function SideRailAd({ slot, className, minHeight = AD_MIN_HEIGHT, height }: SideRailAdProps) {
   const adRef = useRef<HTMLModElement | null>(null);
   const initializedRef = useRef(false);
   const pathname = usePathname();
@@ -96,12 +97,16 @@ export function SideRailAd({ slot, className, minHeight = AD_MIN_HEIGHT }: SideR
     };
   }, [slot, pathname]);
 
+  const heightStyle = height
+    ? { height: `${height}px` }
+    : { minHeight: `${minHeight}px` };
+
   return (
-    <div className={cn('w-full', className)} style={{ minHeight: `${minHeight}px` }}>
+    <div className={cn('w-full', className)} style={heightStyle}>
       <ins
         ref={adRef}
         className="adsbygoogle block"
-        style={{ display: 'block', width: '100%', minHeight: `${minHeight}px` }}
+        style={{ display: 'block', width: '100%', ...heightStyle }}
         data-ad-client={ADSENSE_CLIENT_ID}
         data-ad-slot={slot}
         data-ad-format="auto"
