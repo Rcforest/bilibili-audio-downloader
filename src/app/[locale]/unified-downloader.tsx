@@ -11,10 +11,10 @@ import { toast } from '@/lib/deferred-toast';
 import { Loader2, HelpCircle, Github, History } from 'lucide-react';
 import type { HomeDictionary } from '@/lib/i18n/types';
 import type { Locale } from "@/lib/i18n/config";
-import { DeferredLanguageSwitcher } from "@/components/deferred-language-switcher";
-import { DeferredFeedbackDialog } from '@/components/deferred-feedback-dialog';
-import { DeferredChangelogDialog } from '@/components/deferred-changelog-dialog';
-import { DeferredMobileNavMenu } from '@/components/deferred-mobile-nav-menu';
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { FeedbackDialog } from '@/components/feedback-dialog';
+import { ChangelogDialog } from '@/components/changelog-dialog';
+import { MobileNavMenu } from '@/components/mobile-nav-menu';
 import { API_ENDPOINTS } from '@/lib/config';
 import { appendLangQuery, buildApiI18nHeaders } from '@/lib/api-i18n';
 
@@ -252,9 +252,9 @@ export function UnifiedDownloader({
                         )}
                     </div>
                     <div className="flex items-center gap-1">
-                        <DeferredFeedbackDialog locale={locale} dict={dict} />
-                        <DeferredLanguageSwitcher currentLocale={locale} dict={dict} compact />
-                        <DeferredMobileNavMenu locale={locale} dict={dict} />
+                        <FeedbackDialog locale={locale} dict={dict} />
+                        <LanguageSwitcher currentLocale={locale} dict={dict} compact />
+                        <MobileNavMenu locale={locale} dict={dict} />
                     </div>
                 </div>
                 <div className="hidden md:flex max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 justify-end items-center gap-1">
@@ -270,9 +270,9 @@ export function UnifiedDownloader({
                             <span>{dict.page.faqLinkText}</span>
                         </Link>
                     </Button>
-                    <DeferredFeedbackDialog locale={locale} dict={dict} />
-                    <DeferredChangelogDialog locale={locale} dict={dict} />
-                    <DeferredLanguageSwitcher currentLocale={locale} dict={dict} />
+                    <FeedbackDialog locale={locale} dict={dict} />
+                    <ChangelogDialog locale={locale} dict={dict} />
+                    <LanguageSwitcher currentLocale={locale} dict={dict} />
                 </div>
             </div>
 

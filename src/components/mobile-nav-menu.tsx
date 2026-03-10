@@ -11,7 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
-import { DeferredChangelogDialog } from '@/components/deferred-changelog-dialog'
+import { ChangelogDialog } from '@/components/changelog-dialog'
 import type { Locale } from '@/lib/i18n/config'
 import type { HomeDictionary } from '@/lib/i18n/types'
 
@@ -57,7 +57,7 @@ export function MobileNavMenu({
                             <span>{dict.page.faqLinkText}</span>
                         </Link>
                     </Button>
-                    <DeferredChangelogDialog
+                    <ChangelogDialog
                         locale={locale}
                         dict={dict}
                         triggerClassName="w-full justify-start"
