@@ -1,10 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-"name": "galaxy-downloader",
-"compatibility_date": "2026-03-25",
+  "name": "galaxy-downloader",
+  "compatibility_date": "2026-03-25",
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "vars": {
+    // "API_BASE_URL": "https://downloader-api.bhwa233.com",
+    // "NEXT_PUBLIC_SITE_URL": "https://downloader.bhwa233.com",
+    // "SEO_INDEXABLE": "true"
+  },
   "main": "./worker/index.ts",
   "assets": {
     "directory": "dist/client",
